@@ -9,8 +9,10 @@ function userModel(mongoose) {
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Role',
+        default: 'user',
       },
     ],
+    tokens: [],
   });
 
   userSchema.pre('save', async function (next) {

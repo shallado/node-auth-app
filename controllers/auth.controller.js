@@ -13,3 +13,15 @@ exports.signup = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+exports.signin = async (req, res) => {
+  const { email, token } = req.body;
+
+  try {
+    await User.findOneAndUpdate({ email }, { $push: { tokens: token } });
+
+    res.send({ message: 'successfully signed in' });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
